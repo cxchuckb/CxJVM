@@ -29,7 +29,7 @@ jobs:
     - name: Checkmarx CxFlow Action
       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.1 #Github Action version
       with:
-        project: CxCB-JVM-GHA # <-- Insert Checkmarx SAST Project Name
+        project:${{ github.repository }}-Push # <-- Insert Checkmarx SAST Project Name
         team: /CxServer/SP/America/checkmarx.com - 1
         checkmarx_url: ${{ secrets.CHECKMARX_URL }} # To be stored in GitHub Secrets.
         checkmarx_username: ${{ secrets.CHECKMARX_USER }} # To be stored in GitHub Secrets.
@@ -39,7 +39,3 @@ jobs:
         scanners: sast
         bug_tracker: GITHUBPULL
         params: --namespace=${{ github.repository_owner }} --repo-name=${{ github.event.repository.name }} --branch=${{ github.ref }}
-    #- name: Upload SARIF file
-    #  uses: github/codeql-action/upload-sarif@v1
-    #  with:
-    #    sarif_file: cx.sarif
